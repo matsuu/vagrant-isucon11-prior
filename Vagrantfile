@@ -75,6 +75,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     set -e
+    
+    # fix for speedtest-cli
+    ln -s /usr/share/keyrings /etc/apt/keyrings
+
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
     apt-get install -y --no-install-recommends git itamae
