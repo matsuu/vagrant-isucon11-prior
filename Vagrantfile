@@ -85,11 +85,9 @@ Vagrant.configure("2") do |config|
 
     GITDIR="/tmp/isucon11-prior"
     rm -rf ${GITDIR}
-    git clone -b matsuu-fix https://github.com/matsuu/isucon11-prior.git ${GITDIR}
+    git clone https://github.com/isucon/isucon11-prior.git ${GITDIR}
     (
-
       cd ${GITDIR}/infra/instance
-      openssl x509 -in <(openssl req -subj '/CN=localhost' -nodes -newkey rsa:2048 -keyout cookbooks/nginx/files/usr/local/ssl/privkey.pem) -req -signkey cookbooks/nginx/files/usr/local/ssl/privkey.pem -sha256 -days 3650 -out cookbooks/nginx/files/usr/local/ssl/fullchain.pem -extfile <(echo -e "basicConstraints=critical,CA:true,pathlen:0\nsubjectAltName=DNS.1:localhost,IP.1:127.0.0.1")
       itamae local recipe.rb
     )
     rm -rf ${GITDIR}
